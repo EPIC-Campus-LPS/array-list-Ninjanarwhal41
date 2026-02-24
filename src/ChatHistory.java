@@ -15,6 +15,9 @@ public class ChatHistory {
         arr.add(s);
     }
 
+    /** checks if all the words in the chat history are lowercase
+     * @return a boolean that is true if all words are lowercase
+     */
     public boolean lowercase(){
         for (String s : arr) {
             if(s.equals(s.toLowerCase())){
@@ -27,6 +30,9 @@ public class ChatHistory {
         return true;
     }
 
+    /** this method finds the number of unique words in the chat history.
+     * @return an integer with the number of unique words.
+     */
     public int numUniqueWords(){
         int count = 0;
         ArrayList<String> temp = new ArrayList<>();
@@ -39,6 +45,9 @@ public class ChatHistory {
         return count;
     }
 
+    /** iterates through arr and finds the longest word
+     * @return the longest word in the chat history
+     */
     public String longestWord(){
         String longest = arr.get(0);
         for(String s : arr){
@@ -49,6 +58,10 @@ public class ChatHistory {
         }
         return longest;
     }
+
+    /** finds the number of "the"s ignoring case
+     * @return number of times "the" appears
+     */
     public int theCount(){
         int count = 0;
         for(String s : arr){
@@ -60,6 +73,9 @@ public class ChatHistory {
     }
     public ChatHistory(int capacity) {}
 
+    /** returns the chat history without words that are 3 letters or fewer or duplicate words.
+     * @return a description of chat history object
+     */
     public String toString(){
         String output = "";
         arr.replaceAll(String::toLowerCase);

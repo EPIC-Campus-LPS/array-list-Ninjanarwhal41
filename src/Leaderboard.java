@@ -9,43 +9,78 @@ public class Leaderboard {
         scoreboard = new ArrayList<Score>(capacity);
     }
 
+    /** adds a score to the leaderboard in the correct position.
+     * @param name the name that goes in a score object
+     * @param score the score that goes in a score object
+     */
     public void addScore(String name, int score){
-        Score e = new Score(name, score);
-        for (int i = 0; i < capacity; i++){
-            if (){
-
+        Score a = new Score(name, score);
+        if(scoreboard.isEmpty()){
+            scoreboard.add(a);
+        }
+        else{
+            if(scoreboard.size() == capacity){
+                scoreboard.removeLast();
+                if (scoreboard.getLast().getScore() >= score){
+                    scoreboard.add(a);
+                }
+            }
+            for(int i = 0; i < scoreboard.size(); i++){
+                if((score > scoreboard.get(i).getScore())){
+                    scoreboard.add(i, a);
+                    break;
+                }
             }
         }
     }
 
+    /** finds the highest score on the scoreboard
+     * @return the first (highest) score on the scoreboard
+     */
     public int getHighScore(){
-        return scoreboard.getLast().getScore();
+        if (scoreboard.isEmpty()){
+            return 0;
+        }
+        return scoreboard.getFirst().getScore();
     }
 
+    /** returns the average score on the scoreboard
+     * @return the average score on the scoreboard
+     */
     public int getAverageScore(){
         int average = 0;
+        if (scoreboard.isEmpty()){
+            return 0;
+        }
         for (Score s : scoreboard){
             average += s.getScore();
         }
-        return average / capacity;
+        return average / scoreboard.size();
     }
 
+    /** checks if a score on the scoreboard breaks 1000
+     * @return true if there is a score greater than 1000
+     */
     public boolean break1000(){
-        return scoreboard.getLast().getScore() > 1000;
-        //since the last element will always be the highest
+        if (scoreboard.isEmpty()){
+            return false;
+        }
+        return scoreboard.getFirst().getScore() > 1000;
+        //since the first element will always be the highest
     }
 
+    /** prints each score object in scoreboard
+     *
+     */
     public void printLeaderboard(){
-        for (int i = capacity; i > 0; i--){
-            System.out.println(scoreboard);
+        if (scoreboard.isEmpty()){
+            System.out.println("No leaderboard found!");
         }
-    }
-
-    public String toString(){
-        for ( int i = 0; i < capacity; i++){
-            System.out.println("next time!!");
+        else{
+            for (int i = 0; i < scoreboard.size(); i++){
+                System.out.println(scoreboard.get(i));
+            }
         }
-        return null;
     }
 
     public static void main(String[] args) {
@@ -69,5 +104,16 @@ public class Leaderboard {
 
         board.printLeaderboard();
 
+        board.addScore("ELI", 1000);
+        System.out.println("\nLeaderboard: ");
+        board.printLeaderboard();
+
+
+        board.addScore("LMNOP", 1001);
+        board.addScore("QRSTU", 275);
+        System.out.println("Did a player break 1000 points?: " + board.break1000());
+
+        System.out.println("\nLeaderboard: ");
+        board.printLeaderboard();
     }
 }

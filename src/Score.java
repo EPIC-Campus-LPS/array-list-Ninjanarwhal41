@@ -24,6 +24,6 @@ public class Score {
     }
 
     public String toString(){
-        return ("Name: " + name + " Score: " + score);
+        return ("Name: " + name + "\t" + " Score: " + score);
     }
 }
